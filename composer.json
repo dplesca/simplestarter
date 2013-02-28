@@ -1,0 +1,9 @@
+{
+	"require": {
+		"klein/klein": "dev-master",
+		"j4mie/idiorm": "dev-master",
+		"infinityweb/k-logger": "dev-master",
+		"twig/twig": "1.12.*@dev",
+		"jamesmoss/toml": "dev-master"
+	}
+}
