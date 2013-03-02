@@ -26,7 +26,6 @@ respond(function ($request, $response, $app) {
 });
 
 respond('GET', '/', function ($request, $response, $app) {
-	//$app->log->logDebug('Testing');
 	echo $app->twig->render('index.twig', array());
 });
 
