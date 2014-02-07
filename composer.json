@@ -1,10 +1,10 @@
 {
-	"require": {
-		"klein/klein": "dev-master",
-		"j4mie/idiorm": "dev-master",
-		"monolog/monolog": "1.7.*@dev",
-		"twig/twig": "1.12.*@dev",
-		"noodlehaus/config": "dev-master",
-		"doctrine/cache": "1.4.*@dev"
-	}
+    "require": {
+        "klein/klein": "dev-master",
+        "j4mie/idiorm": "dev-master",
+        "monolog/monolog": "1.7.*@dev",
+        "twig/twig": "1.12.*@dev",
+        "noodlehaus/config": "dev-master",
+        "doctrine/cache": "1.4.*@dev"
+    }
 }
