@@ -1,13 +1,16 @@
 <?php
 require_once '../vendor/autoload.php';
 
-use Toml\Parser;
-$toml = Parser::fromFile(__DIR__ . '/../app/config.toml');
+use Noodlehaus\Config;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+// load the config
+$conf = Config::load(__DIR__ . '/../app/config.php');
 
 //idiorm configuration
-ORM::configure('mysql:host=' . $toml['database']['server'] . ';dbname=' . $toml['database']['db']);
-ORM::configure('username', $toml['database']['user']);
-ORM::configure('password', $toml['database']['password']);
+ORM::configure('mysql:host=' . $conf->get('database.server') . ';dbname=' . $conf->get('database.db'));
+ORM::configure('username', $conf->get('database.user'));
+ORM::configure('password', $conf->get('database.password'));
 ORM::configure('driver_options', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 
 respond(function ($request, $response, $app) {
@@ -21,7 +24,9 @@ respond(function ($request, $response, $app) {
     });
 
     $app->register('log', function(){
-    	return new KLogger('../logs/', KLogger::DEBUG);
+    	$log = new Logger('name');
+		$log->pushHandler(new StreamHandler(__DIR__ . '/../logs/', Logger::WARNING));
+    	return $log;
     });
 });
 

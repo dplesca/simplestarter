@@ -2,8 +2,9 @@
 	"require": {
 		"klein/klein": "dev-master",
 		"j4mie/idiorm": "dev-master",
-		"infinityweb/k-logger": "dev-master",
+		"monolog/monolog": "1.7.*@dev",
 		"twig/twig": "1.12.*@dev",
-		"jamesmoss/toml": "dev-master"
+		"noodlehaus/config": "dev-master",
+		"doctrine/cache": "1.4.*@dev"
 	}
 }
