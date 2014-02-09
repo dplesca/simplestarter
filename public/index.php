@@ -4,6 +4,7 @@ require_once '../vendor/autoload.php';
 use Noodlehaus\Config;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use Klein\Klein;
 // load the config
 $conf = Config::load(__DIR__ . '/../app/config.php');
 
@@ -13,7 +14,9 @@ ORM::configure('username', $conf->get('database.user'));
 ORM::configure('password', $conf->get('database.password'));
 ORM::configure('driver_options', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 
-respond(function ($request, $response, $app) {
+$klein = new Klein();
+
+$klein->respond(function ($request, $response, $service, $app) use ($klein) {
     $app->register('twig', function() {
         $loader = new Twig_Loader_Filesystem('../templates/');
         $twig = new Twig_Environment($loader, array(
@@ -30,9 +33,8 @@ respond(function ($request, $response, $app) {
     });
 });
 
-respond('GET', '/', function ($request, $response, $app) {
+$klein->respond('GET', '/', function ($request, $response, $service, $app) {
     echo $app->twig->render('index.twig', array());
 });
 
-dispatch();
-?>
+$klein->dispatch();
